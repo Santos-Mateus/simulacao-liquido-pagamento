@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cálculo Líquido Pagamento</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header id="header">
+        <img id="logo" src="img\logo_calcula.png" alt="Calcula Online">
+        <nav class="nav" id="nav">
+            <button aria-label="Abrir menu" id="btn-mobile" aria-haspopup="true" aria-expanded="false">Menu
+                <span id="hamburguer"></span>
+            </button>
+            <ul id="menu" role="menu">
+              <li><a href="/">Calculadora online</a></li>
+              <li><a href="/">Links úteis</a></li>
+              <li><a href="/">Tabelas</a></li>
+              <li><a href="/">Sobre</a></li>
+            </ul>
+        </nav> 
+    </header>
+    <main id="container">
+        <div class="itens">
+            <section id="calculo">
+                <form id="formulario">
+                    <h1 id="titulo">
+                        Simulador - Líquido de Pagamento Mensal
+                    </h1>
+                    <p>Este simulador demonstra o valor a ser pago a um funcionário, no final do mês, 
+                        considerando os principais descontos.
+                    </p>
+                    <div class="caixa-entrada">
+                        <label>
+                            Salário Bruto
+                        </label>
+                        <div class="campo-entrada">
+                            <input type="number" id="salario-bruto" step="0.01" required>
+                            <span>
+                                R$
+                            </span>  
+                        </div>
+                    </div>
+                    <div class="caixa-entrada">
+                        <label>
+                            Descontos Gerais
+                        </label>
+                        <div class="campo-entrada">
+                            <input type="number" id="descontos" step="0.01" required> 
+                            <span>
+                                R$
+                            </span>  
+                        </div>
+                    </div>
+                    <div class="caixa-entrada">
+                        <label>
+                            Dependentes
+                        </label>
+                        <div class="campo-entrada">
+                            <input type="number" id="dependentes" required>
+                            <span>
+                                Qtde
+                            </span>
+                        </div>
+                    </div>
+                    <button type="submit" id="calcular">Calcular</button>
+                </form>
+            </section>
+            <section id="img">
+                <img src="img/ilustracao1.png" alt="Pessoa calculando">
+            </section>
+        </div>
+        <div id="resultado" class="hidden">
+            <h2 id="resultado">Resultado</h2>
+            <table >
+                <caption>
+                    Resultado líquido de pagamento em R$ - ano referência: 2024
+                </caption>
+                <thead>
+                    <tr id="titulos">
+                        <td>EVENTOS</td>
+                        <td>ALÍQUOTA REAL</td>
+                        <td>PROVENTOS</td>
+                        <td>DESCONTOS</td>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Salário Bruto</td>
+                        <td>-</td>
+                        <td id="salario"><span></span></td>
+                        <td>-</td>
+                    </tr>
+                    <tr>
+                        <td>Outros</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td id="tabela-descontos"><span></span></td>
+                    </tr>
+                    <tr>
+                        <td>INSS</td>
+                        <td id="aliquota-inss"></td>
+                        <td>-</td>
+                        <td id="valor-inss"></td>
+                    </tr>
+                    <tr>
+                        <td>IRRF</td>
+                        <td id="aliquota-irrf"></td>
+                        <td>-</td>
+                        <td id="valor-irrf"></td>
+                    </tr>
+                </tbody>
+                <tr>
+                    <th scope="row" colspan="2">Totais</th>
+                    <td id="total-proventos"></td>
+                    <td id="total-descontos"></td>
+                </tr>
+                <tfoot>
+                    <tr>
+                        <th scope="row" colspan="3">Pagamento Líquido</th>
+                        <td id="liquido"></td>
+                    </tr>
+                </tfoot>        
+            </table>
+        </div>
+        <script src="script.js"></script>
+    </main>
+    <footer>
+        <p>Direitos autorais © 2024. Todos os direitos reservados.</p>
+    </footer>     
+</body>
+</html>
