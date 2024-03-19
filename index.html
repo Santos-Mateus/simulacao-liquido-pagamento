@@ -36,7 +36,7 @@
                             Salário Bruto
                         </label>
                         <div class="campo-entrada">
-                            <input type="number" id="salario-bruto" step="0.01" required>
+                            <input type="text" id="salario-bruto" name="salario-bruto" step="0.01" required>
                             <span>
                                 R$
                             </span>  
@@ -47,7 +47,7 @@
                             Descontos Gerais
                         </label>
                         <div class="campo-entrada">
-                            <input type="number" id="descontos" step="0.01" required> 
+                            <input type="text" id="descontos" step="0.01" required> 
                             <span>
                                 R$
                             </span>  
@@ -75,7 +75,7 @@
             <h2 id="resultado">Resultado</h2>
             <table >
                 <caption>
-                    Resultado líquido de pagamento em R$ - ano referência: 2024
+                    Resultado líquido de pagamento em reais (R$) - ano referência: 2024
                 </caption>
                 <thead>
                     <tr id="titulos">
@@ -124,7 +124,17 @@
                 </tfoot>        
             </table>
         </div>
+        
         <script src="script.js"></script>
+
+        <!-- MASCARA MOEDA COM JQUERY -->
+        <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.js" ></script>
+        <script>
+            $('#salario-bruto').mask('000.000.000.000.000,00', {reverse: true});
+            $('#descontos').mask('000.000.000.000.000,00', {reverse: true});
+            $('#liquido').mask('000.000.000.000.000,00', {reverse: true});
+        </script>
     </main>
     <footer>
         <p>Direitos autorais © 2024. Todos os direitos reservados.</p>
