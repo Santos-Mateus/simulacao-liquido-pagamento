@@ -19,7 +19,7 @@ function toggleMenu(event) {
 function calcularInss() {
     let salarioBruto = parseFloat(document.getElementById('salario-bruto').value);
     salarioBruto *= 1000;
-    
+
     if (salarioBruto <= 1412) {
         return salarioBruto * 0.075;
     } else if (salarioBruto > 1412 && salarioBruto <= 2666.68) {
@@ -40,6 +40,7 @@ function calcularIrrf() {
     const dependentes = document.getElementById('dependentes').value;
     const deducaoDependenteIrrf = dependentes * 189.59;
     const baseIrrf = salarioBruto - calcularInss() - deducaoDependenteIrrf;
+    let irrf = 0;
 
     if (baseIrrf <= 2259.20) {
         return baseIrrf * 0;
@@ -75,21 +76,21 @@ formulario.addEventListener('submit', event => {
     }
 
     // INCLUSÃO DE INFORMAÇÕES NA TABELA
-    document.getElementById('salario').textContent = salarioBruto;
+    document.getElementById('salario').textContent = (parseFloat(salarioBruto) * 1000).toLocaleString('pt-br',{style: 'currency', currency: 'BRL'});
 
-    document.getElementById('tabela-descontos').textContent = descontos;
+    document.getElementById('tabela-descontos').textContent = parseFloat(descontos).toLocaleString('pt-br',{style: 'currency', currency: 'BRL'});
     
     document.getElementById('aliquota-inss').textContent = aliquotaInss.toFixed(2).replace('.', ',') + '%';
-    document.getElementById('valor-inss').textContent = calcularInss().toFixed(2).replace('.', ',');
+    document.getElementById('valor-inss').textContent = calcularInss().toLocaleString('pt-br',{style: 'currency', currency: 'BRL'});
     
     document.getElementById('aliquota-irrf').textContent = aliquotaIrrf.toFixed(2).replace('.', ',') + '%';
-    document.getElementById('valor-irrf').textContent = calcularIrrf().toFixed(2).replace('.', ',');
+    document.getElementById('valor-irrf').textContent = calcularIrrf().toLocaleString('pt-br',{style: 'currency', currency: 'BRL'});
     
-    document.getElementById('total-proventos').textContent = salarioBruto;
-    document.getElementById('total-descontos').textContent = totalDescontos.toFixed(2).replace('.', ',');
+    document.getElementById('total-proventos').textContent = (parseFloat(salarioBruto) * 1000).toLocaleString('pt-br',{style: 'currency', currency: 'BRL'});
+    document.getElementById('total-descontos').textContent = totalDescontos.toLocaleString('pt-br',{style: 'currency', currency: 'BRL'});
     
-    document.getElementById('liquido').textContent = calcularLiquido().toFixed(2).replace('.', ',');
-
+    document.getElementById('liquido').textContent = calcularLiquido().toLocaleString('pt-br',{style: 'currency', currency: 'BRL'});
+    
 }
 )
 
