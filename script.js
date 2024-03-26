@@ -36,16 +36,20 @@ function calcularInss() {
 
 function calcularIrrf() {
     let salarioBruto = parseFloat(document.getElementById('salario-bruto').value);
-    salarioBruto *= 1000;
     const dependentes = document.getElementById('dependentes').value;
     const deducaoDependenteIrrf = dependentes * 189.59;
     const baseIrrf = salarioBruto - calcularInss() - deducaoDependenteIrrf;
-    let irrf = 0;
+    salarioBruto *= 1000;
 
     if (baseIrrf <= 2259.20) {
-        return baseIrrf * 0;
+        return 0;
     } else if (baseIrrf > 2259.20 && baseIrrf <= 2826.65) {
-        return (baseIrrf * 0.075) - 169.44;
+        // SE VALOR DE IRRF FOR MENOR QUE R$ 10,00, CONTRIBUINTE FICA ISENTO DO PAGAMENTO NO MÊS (Artigo 67 da Lei nº 9.430/1996).
+        if (((baseIrrf * 0.075) - 169.44) <= 10.00) {
+            return 0;
+        }else {
+            return (baseIrrf * 0.075) - 169.44;
+        };
     } else if (baseIrrf > 2826.65 && baseIrrf <= 3751.05) {
         return (baseIrrf * 0.15) - 381.44;
     } else if (baseIrrf > 3751.05 && baseIrrf < 4664.68) {
@@ -57,17 +61,21 @@ function calcularIrrf() {
 
 formulario.addEventListener('submit', event => {
     event.preventDefault();
+    window.scrollBy(0, 200);
 
     // CAPTAÇÃO DE DADOS DO FORMULÁRIO
-    const salarioBruto = document.getElementById('salario-bruto').value;
+    const salario = document.getElementById('salario-bruto').value;
     const descontos = document.getElementById('descontos').value;
-     
+    const salarioBruto = parseFloat(salario);  
+    
+    //REMOVE "ESCONDIDO" DA TABELA
     document.getElementById('resultado').classList.remove('hidden');
 
     // CÁLCULOS: TOTAL DE DESCONTOS, VALOR LÍQUIDO, ALÍQUOTA REAL INSS E IRRF
-    const aliquotaInss = (calcularInss() / parseFloat(salarioBruto)) / 10;
-    const aliquotaIrrf = (calcularIrrf() / parseFloat(salarioBruto)) / 10;
+    const aliquotaInss = (calcularInss() / salarioBruto) / 10;
+    const aliquotaIrrf = (calcularIrrf() / salarioBruto) / 10;
     const totalDescontos = parseFloat(descontos) + calcularInss() + calcularIrrf();
+
     function calcularLiquido() {
         let salarioBruto = parseFloat(document.getElementById('salario-bruto').value);
         salarioBruto *= 1000;
@@ -76,20 +84,20 @@ formulario.addEventListener('submit', event => {
     }
 
     // INCLUSÃO DE INFORMAÇÕES NA TABELA
-    document.getElementById('salario').textContent = (parseFloat(salarioBruto) * 1000).toLocaleString('pt-br',{style: 'currency', currency: 'BRL'});
+    document.getElementById('salario').textContent = (salarioBruto * 1000).toLocaleString('pt-br', {minimumFractionDigits: 2});
 
-    document.getElementById('tabela-descontos').textContent = parseFloat(descontos).toLocaleString('pt-br',{style: 'currency', currency: 'BRL'});
+    document.getElementById('tabela-descontos').textContent = parseFloat(descontos).toLocaleString('pt-br', {minimumFractionDigits: 2});
     
     document.getElementById('aliquota-inss').textContent = aliquotaInss.toFixed(2).replace('.', ',') + '%';
-    document.getElementById('valor-inss').textContent = calcularInss().toLocaleString('pt-br',{style: 'currency', currency: 'BRL'});
+    document.getElementById('valor-inss').textContent = calcularInss().toLocaleString('pt-br', {minimumFractionDigits: 2});
     
     document.getElementById('aliquota-irrf').textContent = aliquotaIrrf.toFixed(2).replace('.', ',') + '%';
-    document.getElementById('valor-irrf').textContent = calcularIrrf().toLocaleString('pt-br',{style: 'currency', currency: 'BRL'});
+    document.getElementById('valor-irrf').textContent = calcularIrrf().toLocaleString('pt-br', {minimumFractionDigits: 2});
     
-    document.getElementById('total-proventos').textContent = (parseFloat(salarioBruto) * 1000).toLocaleString('pt-br',{style: 'currency', currency: 'BRL'});
-    document.getElementById('total-descontos').textContent = totalDescontos.toLocaleString('pt-br',{style: 'currency', currency: 'BRL'});
+    document.getElementById('total-proventos').textContent = (salarioBruto * 1000).toLocaleString('pt-br', {minimumFractionDigits: 2});
+    document.getElementById('total-descontos').textContent = totalDescontos.toLocaleString('pt-br', {minimumFractionDigits: 2});
     
-    document.getElementById('liquido').textContent = calcularLiquido().toLocaleString('pt-br',{style: 'currency', currency: 'BRL'});
+    document.getElementById('liquido').textContent = calcularLiquido().toLocaleString('pt-br', {minimumFractionDigits: 2});
     
 }
 )
