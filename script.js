@@ -36,13 +36,14 @@ function calcularInss() {
 
 function calcularIrrf() {
     let salarioBruto = parseFloat(document.getElementById('salario-bruto').value);
+    salarioBruto *= 1000;
     const dependentes = document.getElementById('dependentes').value;
     const deducaoDependenteIrrf = dependentes * 189.59;
     const baseIrrf = salarioBruto - calcularInss() - deducaoDependenteIrrf;
-    salarioBruto *= 1000;
+    
 
     if (baseIrrf <= 2259.20) {
-        return 0;
+        return baseIrrf * 0;
     } else if (baseIrrf > 2259.20 && baseIrrf <= 2826.65) {
         // SE VALOR DE IRRF FOR MENOR QUE R$ 10,00, CONTRIBUINTE FICA ISENTO DO PAGAMENTO NO MÊS (Artigo 67 da Lei nº 9.430/1996).
         if (((baseIrrf * 0.075) - 169.44) <= 10.00) {
