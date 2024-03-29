@@ -98,13 +98,14 @@ main {
   padding: 0.3rem;
   border-radius: 3px;
   margin-top: 3px;
-  width: 50%;
+  width: 70%;
 }
 
 .campo-entrada span {
     color: #d9d9d9;
     font-size: 1rem;
     padding: 0.2rem 0.5rem;
+    width: 18%;
 }
 
 .campo-entrada input {
@@ -217,6 +218,10 @@ footer {
     font-size: 1.3rem;
     text-align: left;
   }
+
+  a {
+    font-size: 1.3rem;
+  }
   
   .itens {
     display: flex;
@@ -233,6 +238,7 @@ footer {
 
   .campo-entrada span {
     font-size: 1.2rem;
+    width: 20%;
   }
 
   .campo-entrada input {
